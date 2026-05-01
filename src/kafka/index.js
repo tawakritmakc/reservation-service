@@ -1,7 +1,7 @@
 const { Kafka } = require('kafkajs');
 
 const kafka = new Kafka({
-  clientId: 'quotation-service',
+  clientId: 'reservation-service',
   brokers: ['pkc-619z3.us-east1.gcp.confluent.cloud:9092'],
   ssl: true,
   sasl: {
