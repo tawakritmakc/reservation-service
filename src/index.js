@@ -24,7 +24,7 @@ const kafkaHandler = async (topic, payload) => {
     case 'sale.quotationcreated.complete':
       await handleQuotationCreated(payload);
       break;
-    case 'marketing.advertisement.announcements':
+    case 'marketing.advertisement.announcement':
       await handleAdvertisementAnnounced(payload);
       break;
     case 'marketing.customer.created':
@@ -51,7 +51,7 @@ const start = async () => {
 
     await connectKafka();
     await subscribeToTopics(
-      ['sale.quotationcreated.complete', 'marketing.advertisement.announcements', 'marketing.customer.created'],
+      ['sale.quotationcreated.complete', 'marketing.advertisement.announcement', 'marketing.customer.created'],
       kafkaHandler
     );
 
