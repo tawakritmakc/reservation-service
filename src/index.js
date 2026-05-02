@@ -24,10 +24,10 @@ const kafkaHandler = async (topic, payload) => {
     case 'sale.quotationcreated.complete':
       await handleQuotationCreated(payload);
       break;
-    case 'marketing.advertisement.announced':
+    case 'marketing.advertisement.announcements':
       await handleAdvertisementAnnounced(payload);
       break;
-    case 'marketing.lead.created':
+    case 'marketing.customer.created':
       // รับรู้ว่ามี lead ใหม่ (optional: log หรือ sync ข้อมูล)
       console.log('📌 New lead created:', payload);
       break;
@@ -51,7 +51,7 @@ const start = async () => {
 
     await connectKafka();
     await subscribeToTopics(
-      ['sale.quotationcreated.complete', 'marketing.advertisement.announced', 'marketing.lead.created'],
+      ['sale.quotationcreated.complete', 'marketing.advertisement.announcements', 'marketing.customer.created'],
       kafkaHandler
     );
 
