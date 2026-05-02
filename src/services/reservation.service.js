@@ -173,8 +173,23 @@ const handleQuotationCreated = async (payload) => {
 
   // Lock inventory
   await lockInventory(propertyId, reservation.reservation_id);
+// Publish sale.availableunit.completed → แจ้ง payment, inventory, marketing
+await publishEvent('sale.availableunit.completed', {
+  reservationId: reservation.reservation_id,
+  customerId: reservation.customer_id,
+  propertyId: reservation.property_id,
+  projectName: reservation.project_name,
+  price: reservation.price,
+  pricePerUnit: reservation.price_per_unit,
+  bookingCost: reservation.booking_cost,
+  paymentAmount: reservation.payment_amount,
+  promotion: reservation.promotion,
+  propertyStatus: reservation.property_status,
+  expireDate: reservation.expire_date,
+  createdAt: reservation.created_at,
+});
 
-  // Publish event
+// Publish sale.reservationcreated.complete
   await publishEvent('sale.reservationcreated.complete', {
     reservationId: reservation.reservation_id,
     customerId: reservation.customer_id,
